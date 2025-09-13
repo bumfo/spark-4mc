@@ -12,6 +12,9 @@ lazy val root = (project in file("."))
     // Java compiler settings
     Compile / javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-encoding", "UTF-8"),
     Test / javacOptions ++= (Compile / javacOptions).value,
+    // Disable javadoc packaging to avoid JDK flag incompatibilities during publishLocal
+    Compile / packageDoc / publishArtifact := false,
+    Compile / doc / sources := Seq.empty,
 
     // Dependencies (match Maven pom.xml)
     libraryDependencies ++= Seq(
@@ -30,4 +33,3 @@ lazy val root = (project in file("."))
     licenses += ("BSD-2-Clause", url("https://opensource.org/licenses/BSD-2-Clause")),
     homepage := Some(url("https://github.com/fingltd/4mc"))
   )
-
